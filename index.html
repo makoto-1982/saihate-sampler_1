@@ -8,9 +8,6 @@
 </head>
 <body>
     <div class="sampler">
-        <!-- 同時発音切り替えボタン -->
-        <button id="toggle-simultaneous">同時発音：ON</button>
-
         <!-- パッド8つ -->
         <button class="pad" data-sound="sound1">Q</button>
         <button class="pad" data-sound="sound2">W</button>
@@ -21,8 +18,11 @@
         <button class="pad" data-sound="sound7">D</button>
         <button class="pad" data-sound="sound8">F</button>
 
-        <!-- 停止ボタン -->
-        <button id="stop-button">Stop All</button>
+        <!-- コントロールボタン（同時発音と停止ボタン）を並べる -->
+        <div class="controls">
+            <button id="toggle-simultaneous" class="on">同時発音：ON</button>
+            <button id="stop-button">Stop All</button>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
