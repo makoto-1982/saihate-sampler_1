@@ -10,9 +10,8 @@ const sounds = {
     'sound8': new Audio('sounds/sound8.mp3')
 };
 
-// パッドと停止ボタンの要素を取得
+// パッドの要素を取得
 const pads = document.querySelectorAll('.pad');
-const stopButton = document.getElementById('stop-button');
 let audioElements = []; // 再生中の音を管理するための配列
 
 // キーとサウンドの対応
@@ -71,20 +70,6 @@ function playSound(soundId, pad) {
 function flashBackground() {
     document.body.style.backgroundColor = '#333';
     setTimeout(() => {
-        document.body.style.backgroundColor = '#111';
+        document.body.style.backgroundColor = '#000';
     }, 100);
 }
-
-// 停止ボタンのクリックで全サウンドを停止
-stopButton.addEventListener('click', () => {
-    audioElements.forEach(audio => {
-        audio.pause();
-        audio.currentTime = 0;
-    });
-    audioElements = [];
-
-    // 停止ボタンのビジュアルエフェクト
-    stopButton.classList.add('active');
-    setTimeout(() => stopButton.classList.remove('active'), 100);
-});
-
