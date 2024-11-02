@@ -33,6 +33,7 @@ const keyToPadMap = {
 toggleSimultaneousButton.addEventListener('click', () => {
     isSimultaneous = !isSimultaneous;
     toggleSimultaneousButton.textContent = `同時発音：${isSimultaneous ? 'ON' : 'OFF'}`;
+    toggleSimultaneousButton.classList.toggle('on', isSimultaneous);
     toggleSimultaneousButton.classList.toggle('off', !isSimultaneous);
 });
 
