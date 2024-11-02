@@ -1,50 +1,65 @@
-// パッド要素の取得
+// サウンドを事前ロード
+const sounds = {
+    'sound1': new Audio('sounds/sound1.mp3'),
+    'sound2': new Audio('sounds/sound2.mp3'),
+    'sound3': new Audio('sounds/sound3.mp3'),
+    'sound4': new Audio('sounds/sound4.mp3'),
+    'sound5': new Audio('sounds/sound5.mp3'),
+    'sound6': new Audio('sounds/sound6.mp3'),
+    'sound7': new Audio('sounds/sound7.mp3'),
+    'sound8': new Audio('sounds/sound8.mp3')
+};
+
+// パッドと停止ボタンの要素を取得
 const pads = document.querySelectorAll('.pad');
-let audioElements = [];
+const stopButton = document.getElementById('stop-button');
+let audioElements = []; // 再生中の音を管理するための配列
 
 // キーとサウンドの対応
 const keyToPadMap = {
-    'q': 'sounds/sound1.mp3',
-    'w': 'sounds/sound2.mp3',
-    'e': 'sounds/sound3.mp3',
-    'r': 'sounds/sound4.mp3',
-    'a': 'sounds/sound5.mp3',
-    's': 'sounds/sound6.mp3',
-    'd': 'sounds/sound7.mp3',
-    'f': 'sounds/sound8.mp3'
+    'q': 'sound1',
+    'w': 'sound2',
+    'e': 'sound3',
+    'r': 'sound4',
+    'a': 'sound5',
+    's': 'sound6',
+    'd': 'sound7',
+    'f': 'sound8'
 };
 
-// パッドのクリックでサウンド再生
+// パッドのクリックでサウンドを再生
 pads.forEach(pad => {
     pad.addEventListener('click', () => {
-        playSound(pad.getAttribute('data-sound'), pad);
+        const soundId = pad.getAttribute('data-sound');
+        playSound(soundId, pad);
     });
 });
 
-// キーボード入力でサウンド再生
+// キーボード入力でサウンドを再生
 document.addEventListener('keydown', (event) => {
-    const soundSrc = keyToPadMap[event.key.toLowerCase()];
-    if (soundSrc) {
-        const pad = document.querySelector(`.pad[data-sound="${soundSrc}"]`);
-        playSound(soundSrc, pad);
+    const soundId = keyToPadMap[event.key.toLowerCase()];
+    if (soundId) {
+        const pad = document.querySelector(`.pad[data-sound="${soundId}"]`);
+        playSound(soundId, pad);
     }
 });
 
-// サウンドを再生し、エフェクトを追加
-function playSound(soundSrc, pad) {
-    const audio = new Audio(soundSrc);
+// サウンドを再生し、ビジュアルエフェクトを追加
+function playSound(soundId, pad) {
+    const audio = sounds[soundId];
+    audio.currentTime = 0; // 再生位置をリセットして再生
     audio.play();
     audioElements.push(audio);
 
-    // ビジュアルエフェクト
+    // パッドのビジュアルエフェクト
     pad.classList.add('active');
     setTimeout(() => pad.classList.remove('active'), 100);
 
-    // 背景効果
+    // 背景のフラッシュエフェクト
     flashBackground();
 }
 
-// 背景フラッシュ効果
+// 背景のフラッシュエフェクト
 function flashBackground() {
     document.body.style.backgroundColor = '#333';
     setTimeout(() => {
@@ -52,16 +67,15 @@ function flashBackground() {
     }, 100);
 }
 
-// 停止ボタン
-document.getElementById('stop-button').addEventListener('click', () => {
+// 停止ボタンのクリックで全サウンドを停止
+stopButton.addEventListener('click', () => {
     audioElements.forEach(audio => {
         audio.pause();
         audio.currentTime = 0;
     });
     audioElements = [];
-    
+
     // 停止ボタンのビジュアルエフェクト
-    const stopButton = document.getElementById('stop-button');
     stopButton.classList.add('active');
     setTimeout(() => stopButton.classList.remove('active'), 100);
 });
