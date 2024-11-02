@@ -28,7 +28,7 @@ body {
     transition: background-color 0.3s, transform 0.1s;
 }
 
-/* ボタンのアクティブエフェクト */
+/* パッドおよび停止ボタンのアクティブエフェクト */
 .pad.active, #stop-button.active {
     background-color: #ff5722;
     box-shadow: 0px 0px 15px rgba(255, 87, 34, 0.8);
@@ -39,4 +39,3 @@ body {
     background-color: #880000;
     grid-column: span 3;
 }
-
