@@ -16,7 +16,7 @@ body {
     margin: auto;
 }
 
-.pad, #stop-button, #toggle-simultaneous {
+.pad, #stop-button {
     width: 100px;
     height: 100px;
     background-color: #333;
@@ -35,23 +35,7 @@ body {
     transform: scale(0.95);
 }
 
-/* コントロールボタンを横並び */
-.controls {
-    display: flex;
-    justify-content: space-between;
-    grid-column: span 3;
-}
-
-/* 同時発音ボタンの色 */
-#toggle-simultaneous.on {
-    background-color: #006600; /* 緑色 */
-}
-
-#toggle-simultaneous.off {
-    background-color: #880000; /* 赤色 */
-}
-
 #stop-button {
     background-color: #880000;
+    grid-column: span 3;
 }
-
