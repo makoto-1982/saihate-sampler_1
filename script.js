@@ -10,11 +10,9 @@ const sounds = {
     'sound8': new Audio('sounds/sound8.mp3')
 };
 
-// パッドとボタン要素を取得
+// パッドと停止ボタンの要素を取得
 const pads = document.querySelectorAll('.pad');
 const stopButton = document.getElementById('stop-button');
-const toggleSimultaneousButton = document.getElementById('toggle-simultaneous');
-let isSimultaneous = true; // 同時発音の初期状態
 let audioElements = []; // 再生中の音を管理するための配列
 
 // キーとサウンドの対応
@@ -28,14 +26,6 @@ const keyToPadMap = {
     'd': 'sound7',
     'f': 'sound8'
 };
-
-// 同時発音切り替えボタンのクリックイベント
-toggleSimultaneousButton.addEventListener('click', () => {
-    isSimultaneous = !isSimultaneous;
-    toggleSimultaneousButton.textContent = `同時発音：${isSimultaneous ? 'ON' : 'OFF'}`;
-    toggleSimultaneousButton.classList.toggle('on', isSimultaneous);
-    toggleSimultaneousButton.classList.toggle('off', !isSimultaneous);
-});
 
 // パッドのクリックでサウンドを再生
 pads.forEach(pad => {
@@ -59,14 +49,12 @@ function playSound(soundId, pad) {
     const audio = sounds[soundId];
     audio.currentTime = 0; // 再生位置をリセット
 
-    if (!isSimultaneous) {
-        // 同時発音がOFFの場合、他の音を停止
-        audioElements.forEach(audio => {
-            audio.pause();
-            audio.currentTime = 0;
-        });
-        audioElements = [];
-    }
+    // 他の再生中のサウンドを停止
+    audioElements.forEach(audio => {
+        audio.pause();
+        audio.currentTime = 0;
+    });
+    audioElements = [];
 
     audio.play();
     audioElements.push(audio);
