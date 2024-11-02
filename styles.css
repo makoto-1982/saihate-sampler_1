@@ -1,8 +1,8 @@
 /* 背景画像の設定 */
 body {
     background-image: url('background.jpg'); /* 背景画像ファイル名を指定 */
-    background-size: contain; /* 横幅をブラウザに合わせて固定 */
-    background-position: bottom; /* 画面の底辺に配置 */
+    background-size: contain; /* 縦横比を保って全体が収まるように縮小 */
+    background-position: bottom center; /* 画面の底辺と中央を基準に配置 */
     background-repeat: no-repeat; /* 繰り返さない */
     display: flex;
     justify-content: center;
