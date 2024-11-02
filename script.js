@@ -87,3 +87,4 @@ stopButton.addEventListener('click', () => {
     stopButton.classList.add('active');
     setTimeout(() => stopButton.classList.remove('active'), 100);
 });
+
