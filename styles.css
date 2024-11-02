@@ -1,7 +1,7 @@
 /* 背景画像の設定 */
 body {
     background-image: url('background.jpg'); /* 背景画像ファイル名を指定 */
-    background-size: cover; /* 画面いっぱいに表示 */
+    background-size: contain; /* 横幅をブラウザに合わせて固定 */
     background-position: bottom; /* 画面の底辺に配置 */
     background-repeat: no-repeat; /* 繰り返さない */
     display: flex;
