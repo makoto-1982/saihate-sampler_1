@@ -7,7 +7,8 @@ const sounds = {
     'sound5': new Audio('sounds/sound5.mp3'),
     'sound6': new Audio('sounds/sound6.mp3'),
     'sound7': new Audio('sounds/sound7.mp3'),
-    'sound8': new Audio('sounds/sound8.mp3')
+    'sound8': new Audio('sounds/sound8.mp3'),
+    'sound9': new Audio('sounds/sound9.mp3') // 9つ目の音声を追加
 };
 
 // パッドの要素を取得
@@ -19,11 +20,12 @@ const keyToPadMap = {
     'q': 'sound1',
     'w': 'sound2',
     'e': 'sound3',
-    'r': 'sound4',
-    'a': 'sound5',
-    's': 'sound6',
-    'd': 'sound7',
-    'f': 'sound8'
+    'a': 'sound4',
+    's': 'sound5',
+    'd': 'sound6',
+    'z': 'sound7',
+    'x': 'sound8',
+    'c': 'sound9' // 9つ目の音声をキー「Z」に対応させる
 };
 
 // パッドのクリックでサウンドを再生
