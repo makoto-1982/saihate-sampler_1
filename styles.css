@@ -1,6 +1,6 @@
 /* 背景画像の設定 */
 body {
-    background-image: url('background.png'); /* 背景画像ファイル名を指定 */
+    background-image: url('background.png'); /* 背景画像ファイル名を「background.png」に指定 */
     background-size: contain; /* 縦横比を保って全体が収まるように縮小 */
     background-position: bottom center; /* 画面の底辺と中央を基準に配置 */
     background-repeat: no-repeat; /* 繰り返さない */
@@ -10,7 +10,7 @@ body {
     height: 100vh;
     margin: 0;
     font-family: Arial, sans-serif;
-    color: #000000;
+    color: #fff;
 }
 
 .sampler {
