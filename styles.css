@@ -1,5 +1,6 @@
-/* 背景画像の設定 */
+/* 背景画像と基本の背景色の設定 */
 body {
+    background-color: #000; /* 基本の背景色を黒に設定 */
     background-image: url('background.png'); /* 背景画像ファイル名を「background.png」に指定 */
     background-size: contain; /* 縦横比を保って全体が収まるように縮小 */
     background-position: bottom center; /* 画面の底辺と中央を基準に配置 */
