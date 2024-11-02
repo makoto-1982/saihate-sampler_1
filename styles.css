@@ -2,7 +2,7 @@
 body {
     background-image: url('background.jpg'); /* 背景画像ファイル名を指定 */
     background-size: cover; /* 画面いっぱいに表示 */
-    background-position: center; /* 画面中央に配置 */
+    background-position: bottom; /* 画面の底辺に配置 */
     background-repeat: no-repeat; /* 繰り返さない */
     display: flex;
     justify-content: center;
@@ -24,7 +24,7 @@ body {
 .pad, #stop-button {
     width: 100px;
     height: 100px;
-    background-color: rgba(51, 51, 51, 0.8); /* 背景画像が見えるように透過 */
+    background-color: rgba(51, 51, 51, 0.9); /* わずかに透けるように設定 */
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -35,12 +35,12 @@ body {
 
 /* パッドおよび停止ボタンのアクティブエフェクト */
 .pad.active, #stop-button.active {
-    background-color: rgba(255, 87, 34, 0.8); /* クリック時に透過効果 */
+    background-color: rgba(255, 87, 34, 0.9); /* クリック時のエフェクトも調整 */
     box-shadow: 0px 0px 15px rgba(255, 87, 34, 0.8);
     transform: scale(0.95);
 }
 
 #stop-button {
-    background-color: rgba(136, 0, 0, 0.8);
+    background-color: rgba(136, 0, 0, 0.9); /* 停止ボタンの色を少し透かす */
     grid-column: span 3;
 }
