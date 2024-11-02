@@ -44,3 +44,21 @@ body {
     background-color: #ff0000;
     box-shadow: 0px 0px 10px rgba(255, 0, 0, 0.8);
 }
+
+/* 同時発音ボタン */
+#toggle-simultaneous {
+    background-color: #006600;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-bottom: 10px;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+#toggle-simultaneous.off {
+    background-color: #880000;
+}
