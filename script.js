@@ -1,21 +1,42 @@
-// サウンドを事前ロード
-const sounds = {
-    'sound1': new Audio('sounds/sound1.mp3'),
-    'sound2': new Audio('sounds/sound2.mp3'),
-    'sound3': new Audio('sounds/sound3.mp3'),
-    'sound4': new Audio('sounds/sound4.mp3'),
-    'sound5': new Audio('sounds/sound5.mp3'),
-    'sound6': new Audio('sounds/sound6.mp3'),
-    'sound7': new Audio('sounds/sound7.mp3'),
-    'sound8': new Audio('sounds/sound8.mp3'),
-    'sound9': new Audio('sounds/sound9.mp3') // 9つ目の音声を追加
-};
+// Web Audio APIのAudioContextを作成
+let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+let soundBuffers = {}; // サウンドバッファを保存
 
-// パッドの要素を取得
-const pads = document.querySelectorAll('.pad');
-let audioElements = []; // 再生中の音を管理するための配列
+// サウンドファイルを読み込み、バッファに格納
+async function loadSound(url, key) {
+    const response = await fetch(url);
+    const arrayBuffer = await response.arrayBuffer();
+    soundBuffers[key] = await audioContext.decodeAudioData(arrayBuffer);
+}
 
-// キーとサウンドの対応
+// すべてのサウンドを読み込む
+async function loadAllSounds() {
+    await loadSound('sounds/sound1.mp3', 'sound1');
+    await loadSound('sounds/sound2.mp3', 'sound2');
+    await loadSound('sounds/sound3.mp3', 'sound3');
+    await loadSound('sounds/sound4.mp3', 'sound4');
+    await loadSound('sounds/sound5.mp3', 'sound5');
+    await loadSound('sounds/sound6.mp3', 'sound6');
+    await loadSound('sounds/sound7.mp3', 'sound7');
+    await loadSound('sounds/sound8.mp3', 'sound8');
+    await loadSound('sounds/sound9.mp3', 'sound9'); // 9つ目のサウンド
+}
+
+// 音声を再生する
+function playSound(key) {
+    const buffer = soundBuffers[key];
+    if (buffer) {
+        const source = audioContext.createBufferSource();
+        source.buffer = buffer;
+        source.connect(audioContext.destination);
+        source.start(0);
+    }
+}
+
+// 初期化：ページ読み込み時にすべてのサウンドを読み込み
+loadAllSounds();
+
+// キーボードとパッドの対応
 const keyToPadMap = {
     'q': 'sound1',
     'w': 'sound2',
@@ -25,14 +46,17 @@ const keyToPadMap = {
     'd': 'sound6',
     'z': 'sound7',
     'x': 'sound8',
-    'c': 'sound9' // 9つ目の音声をキー「Z」に対応させる
+    'c': 'sound9'
 };
 
 // パッドのクリックでサウンドを再生
-pads.forEach(pad => {
+document.querySelectorAll('.pad').forEach(pad => {
     pad.addEventListener('click', () => {
         const soundId = pad.getAttribute('data-sound');
-        playSound(soundId, pad);
+        playSound(soundId);
+        // ビジュアルエフェクト
+        pad.classList.add('active');
+        setTimeout(() => pad.classList.remove('active'), 100);
     });
 });
 
@@ -41,37 +65,9 @@ document.addEventListener('keydown', (event) => {
     const soundId = keyToPadMap[event.key.toLowerCase()];
     if (soundId) {
         const pad = document.querySelector(`.pad[data-sound="${soundId}"]`);
-        playSound(soundId, pad);
+        playSound(soundId);
+        // ビジュアルエフェクト
+        pad.classList.add('active');
+        setTimeout(() => pad.classList.remove('active'), 100);
     }
 });
-
-// サウンドを再生し、ビジュアルエフェクトを追加
-function playSound(soundId, pad) {
-    const audio = sounds[soundId];
-    audio.currentTime = 0; // 再生位置をリセット
-
-    // 他の再生中のサウンドを停止
-    audioElements.forEach(audio => {
-        audio.pause();
-        audio.currentTime = 0;
-    });
-    audioElements = [];
-
-    audio.play();
-    audioElements.push(audio);
-
-    // パッドのビジュアルエフェクト
-    pad.classList.add('active');
-    setTimeout(() => pad.classList.remove('active'), 100);
-
-    // 背景のフラッシュエフェクト
-    flashBackground();
-}
-
-// 背景のフラッシュエフェクト
-function flashBackground() {
-    document.body.style.backgroundColor = '#333';
-    setTimeout(() => {
-        document.body.style.backgroundColor = '#000';
-    }, 100);
-}
