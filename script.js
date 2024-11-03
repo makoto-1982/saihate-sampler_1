@@ -1,6 +1,7 @@
 // Web Audio APIのAudioContextを作成
 let audioContext = new (window.AudioContext || window.webkitAudioContext)();
 let soundBuffers = {}; // サウンドバッファを保存
+let currentSource = null; // 現在再生中のサウンドを保持
 
 // サウンドファイルを読み込み、バッファに格納
 async function loadSound(url, key) {
@@ -22,14 +23,20 @@ async function loadAllSounds() {
     await loadSound('sounds/sound9.mp3', 'sound9'); // 9つ目のサウンド
 }
 
-// 音声を再生する
+// 音声を再生する（同時発音を防ぐため、現在の再生を停止）
 function playSound(key) {
+    // 現在再生中のサウンドがあれば停止
+    if (currentSource) {
+        currentSource.stop();
+    }
+
     const buffer = soundBuffers[key];
     if (buffer) {
         const source = audioContext.createBufferSource();
         source.buffer = buffer;
         source.connect(audioContext.destination);
         source.start(0);
+        currentSource = source; // 現在のサウンドを記録
     }
 }
 
