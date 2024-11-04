@@ -56,15 +56,20 @@ const keyToPadMap = {
     'c': 'sound9'
 };
 
-// パッドのタップでサウンドを再生
+// パッドのタップとクリックでサウンドを再生
 document.querySelectorAll('.pad').forEach(pad => {
-    pad.addEventListener('touchstart', () => { // 'click' の代わりに 'touchstart' を使用
-        const soundId = pad.getAttribute('data-sound');
+    const soundId = pad.getAttribute('data-sound');
+
+    // スマホでは 'touchstart'、デスクトップでは 'click' イベントを設定
+    const handlePlay = () => {
         playSound(soundId);
         // ビジュアルエフェクト
         pad.classList.add('active');
         setTimeout(() => pad.classList.remove('active'), 100);
-    });
+    };
+    
+    pad.addEventListener('touchstart', handlePlay);
+    pad.addEventListener('click', handlePlay);
 });
 
 // キーボード入力でサウンドを再生
