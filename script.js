@@ -56,9 +56,9 @@ const keyToPadMap = {
     'c': 'sound9'
 };
 
-// パッドのクリックでサウンドを再生
+// パッドのタップでサウンドを再生
 document.querySelectorAll('.pad').forEach(pad => {
-    pad.addEventListener('click', () => {
+    pad.addEventListener('touchstart', () => { // 'click' の代わりに 'touchstart' を使用
         const soundId = pad.getAttribute('data-sound');
         playSound(soundId);
         // ビジュアルエフェクト
