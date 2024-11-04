@@ -56,11 +56,8 @@ const keyToPadMap = {
     'c': 'sound9'
 };
 
-// パッドのタップとクリックでサウンドを再生
-document.querySelectorAll('.pad').forEach(pad => {
-    const soundId = pad.getAttribute('data-sound');
-
-    // スマホでは 'touchstart'、デスクトップでは 'click' イベントを設定
+// イベントを割り当てる関数
+function assignPadEvents(pad, soundId) {
     const handlePlay = () => {
         playSound(soundId);
         // ビジュアルエフェクト
@@ -68,8 +65,18 @@ document.querySelectorAll('.pad').forEach(pad => {
         setTimeout(() => pad.classList.remove('active'), 100);
     };
     
-    pad.addEventListener('touchstart', handlePlay);
-    pad.addEventListener('click', handlePlay);
+    // タッチ対応デバイスなら touchstart のみを使い、非対応なら click のみを使う
+    if ('ontouchstart' in window) {
+        pad.addEventListener('touchstart', handlePlay);
+    } else {
+        pad.addEventListener('click', handlePlay);
+    }
+}
+
+// 各パッドにイベントを設定
+document.querySelectorAll('.pad').forEach(pad => {
+    const soundId = pad.getAttribute('data-sound');
+    assignPadEvents(pad, soundId);
 });
 
 // キーボード入力でサウンドを再生
