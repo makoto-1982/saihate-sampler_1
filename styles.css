@@ -17,15 +17,15 @@ body {
 .sampler {
     display: grid;
     grid-template-columns: repeat(3, 1fr); /* 3列のグリッドレイアウト */
-    gap: 10px;
-    max-width: 360px; /* 少し広げて全体のサイズを調整 */
+    gap: 8px; /* ボタン間の余白を少し小さく */
+    max-width: 340px; /* 全体の幅を少し調整 */
     margin: auto;
 }
 
 .pad {
-    width: 120px; /* パッドサイズを少し大きく設定 */
-    height: 120px;
-    padding: 10px; /* タップ範囲を広げる */
+    width: 110px; /* パッドサイズを少し小さく */
+    height: 110px;
+    padding: 8px; /* タップ範囲を広げる */
     box-sizing: border-box;
     background-color: rgba(51, 51, 51, 0.9); /* わずかに透けるように設定 */
     color: #fff;
