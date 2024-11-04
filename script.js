@@ -68,6 +68,7 @@ function assignPadEvents(pad, soundId) {
     // タッチ対応デバイスなら touchstart のみを使い、非対応なら click のみを使う
     if ('ontouchstart' in window) {
         pad.addEventListener('touchstart', handlePlay);
+        pad.addEventListener('touchmove', (event) => event.preventDefault()); // タッチ操作でのスクロールを防止
     } else {
         pad.addEventListener('click', handlePlay);
     }
@@ -100,4 +101,3 @@ document.addEventListener('touchend', (event) => {
     }
     lastTouchEnd = now;
 }, false);
-
